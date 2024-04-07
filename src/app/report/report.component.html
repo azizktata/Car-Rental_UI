@@ -22,16 +22,17 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-
+                        <h6 class="text-primary">Incidents</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" datatable class="table table-striped  text-nowrap" style="width:100%">
+                            <table *ngIf="(reportData$ | async) as reports" id="example" datatable
+                                class="table table-striped  text-nowrap" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
                                         <th>id</th>
                                         <th>voiture Id</th>
-                                        <th>conducteur</th>
+
                                         <th>sujet</th>
                                         <th>description</th>
                                         <th>dateAccident</th>
@@ -41,50 +42,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>. 1</td>
-                                        <th>° 3</th>
-                                        <td>Tiger
-                                            Nixon</td>
-                                        <td>Accident avec une camion</td>
+                                    <tr *ngFor="let report of reports">
+                                        <td>{{report.id}}</td>
+                                        <td>{{report.voiture.id}}</td>
+
+                                        <td>{{report.sujet}}</td>
                                         <td><button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="danger" (click)="showModel('descriptionModel')">
+                                                data-ripple-color="danger"
+                                                (click)="showModel('descriptionModel', report.description)">
                                                 <i class="bi bi-file-earmark-text h5"></i>
-                                            </button></td>
-                                        <td>2024-11-05</td>
+
+                                            </button>{{report.description.slice(0,12)}}...</td>
+                                        <td>{{report.dateAccident}}</td>
 
 
                                         <td>
-                                            Routix gp1
+                                            {{report.lieuxAccident}}
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>. 2</td>
-                                        <th>° 4</th>
-                                        <td>Malek</td>
-                                        <td>Accident avec une camion</td>
-                                        <td><button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="danger" (click)="showModel('descriptionModel')">
-                                                <i class="bi bi-file-earmark-text h5"></i>
-                                            </button></td>
-                                        <td>2024-11-05</td>
 
-
-                                        <td>
-                                            Routix gp1
-                                        </td>
-                                    </tr>
 
                                 </tbody>
                                 <tfoot>
-                                    <!-- <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr> -->
+
                                 </tfoot>
                             </table>
                         </div>
@@ -106,7 +86,7 @@
                     (click)="closeModel('descriptionModel')"></button>
             </div>
             <div class="modal-body">
-                dddddddddddddddd
+                {{description}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeModel('descriptionModel')"

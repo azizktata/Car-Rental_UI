@@ -27,7 +27,8 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" datatable class="table table-striped" style="width:100%">
+                            <table *ngIf="(missionData$ | async) as missions" id="example" datatable
+                                class="table table-striped" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
                                         <th>id</th>
@@ -44,87 +45,45 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>° 1</td>
-                                        <td>° 2</td>
-                                        <td>Malek</td>
-                                        <td><span class="badge badge-success rounded-pill d-inline">Validé</span></td>
-                                        <td>2024-04-25</td>
-                                        <td>2024-04-30</td>
-                                        <td>5 jours</td>
-                                        <td>Rades</td>
-                                        <td>Hammamet</td>
+                                    <tr *ngFor="let mission of missions">
+                                        <td>{{mission.id}}</td>
+                                        <td> {{mission.voiture.id}} </td>
+                                        <td>{{mission.conducteur}}</td>
+                                        <td>
+                                            <span *ngIf="mission.statusMission ==='Validé'"
+                                                class="badge badge-success rounded-pill d-inline">{{mission.statusMission}}</span>
+                                            <span *ngIf="mission.statusMission ==='Encours'"
+                                                class="badge badge-warning rounded-pill d-inline">{{mission.statusMission}}</span>
+                                            <span *ngIf="mission.statusMission ==='Annulé'"
+                                                class="badge badge-danger rounded-pill d-inline">{{mission.statusMission}}</span>
+                                        </td>
+                                        <td>{{mission.dateDebut}}</td>
+                                        <td>{{mission.dateFin}}</td>
+                                        <td>{{mission.duree}}</td>
+                                        <td>{{mission.locationDebut}}</td>
+                                        <td>{{mission.locationFin}}</td>
                                         <td>
                                             <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
                                                 data-ripple-color="info ">
-                                                <i class="bi bi-check2-circle h5"></i>
+                                                <i (click)="changeStatusToValid(mission.id)"
+                                                    class="bi bi-check2-circle h5"></i>
                                             </button>
                                             <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
                                                 data-ripple-color="info ">
-                                                <i class="bi bi-ban h6"></i>
+                                                <i (click)="changeStatusToRefuse(mission.id)" class="bi bi-ban h6"></i>
                                             </button>
 
                                             <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
                                                 data-ripple-color="danger">
-                                                <i class="bi bi-x h5"></i>
+                                                <i (click)="deleteMission(mission.id)" class="bi bi-x h5"></i>
                                             </button>
                                             <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="danger" (click)="showModel('missionModel')">
-                                                <i class="bi bi-file-earmark-text h5"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>° 2</td>
-                                        <td>° 5</td>
-                                        <td>Sami</td>
-                                        <td><span class="badge badge-warning rounded-pill d-inline">Encours</span></td>
-                                        <td>2024-04-25</td>
-                                        <td>2024-04-30</td>
-                                        <td>5 jours</td>
-                                        <td>Rades</td>
-                                        <td>Hammamet</td>
-                                        <td>
-                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
-                                                data-ripple-color="info ">
-                                                <i class="bi bi-check2-circle h5"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="danger">
-                                                <i class="bi bi-x h5"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="danger">
+                                                data-ripple-color="danger" (click)="showModel('missionModel',mission)">
                                                 <i class="bi bi-file-earmark-text h5"></i>
                                             </button>
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td>° 3</td>
-                                        <td>° 3</td>
-                                        <td>Louay</td>
-                                        <td><span class="badge badge-danger rounded-pill d-inline">Annulé</span></td>
-                                        <td>2024-04-25</td>
-                                        <td>2024-04-30</td>
-                                        <td>5 jours</td>
-                                        <td>Rades</td>
-                                        <td>Hammamet</td>
-                                        <td>
-                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
-                                                data-ripple-color="info ">
-                                                <i class="bi bi-check2-circle h5"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="danger">
-                                                <i class="bi bi-x h5"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="danger">
-                                                <i class="bi bi-file-earmark-text h5"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
 
                                 </tbody>
                                 <tfoot>
@@ -150,7 +109,7 @@
                     (click)="closeModel('missionModel')"></button>
             </div>
             <div class="modal-body">
-                <app-details-mission></app-details-mission>
+                <app-details-mission [mission]="missionDetails"></app-details-mission>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeModel('missionModel')"

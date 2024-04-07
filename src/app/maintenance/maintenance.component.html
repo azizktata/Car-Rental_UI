@@ -22,13 +22,14 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <a (click)="goToAddVoiture()"
+                        <a (click)="goToAddMaintenance()"
                             class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="bi bi-plus"></i>
                             Ajouter maintenance</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" datatable class="table table-striped text-nowrap" style="width:100%">
+                            <table *ngIf="(maintenanceData$ | async) as maintenances" id="example" datatable
+                                class="table table-striped text-nowrap" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
 
@@ -43,13 +44,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>° 1</td>
-                                        <td>° 3</td>
-                                        <td>Vidange</td>
-                                        <td>2 jours</td>
-                                        <td>2011-04-25</td>
-                                        <td>$320,800</td>
+                                    <tr *ngFor="let maintenance of maintenances">
+                                        <td>{{maintenance.id}}</td>
+                                        <td>{{maintenance.voiture.id}}</td>
+                                        <td>{{maintenance.type}}</td>
+                                        <td>{{maintenance.duree}}</td>
+                                        <td>{{maintenance.dateMaintenance}}</td>
+                                        <td>{{maintenance.frais}}</td>
                                         <td>
                                             <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
                                                 data-ripple-color="primary">
@@ -57,25 +58,8 @@
                                             </button>
                                             <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
                                                 data-ripple-color="primary">
-                                                <i class="bi bi-pencil h5"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>° 2</td>
-                                        <td>° 5</td>
-                                        <td>Lavage</td>
-                                        <td>2 jours</td>
-                                        <td>2011-04-25</td>
-                                        <td>$320,800</td>
-                                        <td>
-                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-x h5"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-pencil h5"></i>
+                                                <i (click)="goToUpdateMaintenance(maintenance.id)"
+                                                    class="bi bi-pencil h5"></i>
                                             </button>
                                         </td>
                                     </tr>

@@ -6,13 +6,14 @@ import { Voiture } from '../_Models/voiture';
 import { Maintenance } from '../_Models/maintenance';
 import { Mission } from '../_Models/mission';
 import { DashData } from '../_Models/dashData';
+import { Report } from '../_Models/report';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
 
-  private baseUrl = 'http://localhost:8383/';
+  private baseUrl = 'http://localhost:8383';
 
   sharedData: string = ""
 
@@ -23,26 +24,29 @@ export class CommonService {
 
 
   // Get all 
-  getAllClients(): Observable<Client> {
-    return this.http.get<Client>(`${this.baseUrl}/employes`);
+  getAllClients(): Observable<Client[]> {
+    return this.http.get<Client[]>(`${this.baseUrl}/employes`);
   }
-  getAllVoitures(): Observable<Voiture> {
-    return this.http.get<Voiture>(`${this.baseUrl}/voitures`);
+  getAllVoitures(): Observable<Voiture[]> {
+    return this.http.get<Voiture[]>(`${this.baseUrl}/voitures`);
   }
-  getAllReports(): Observable<Report> {
-    return this.http.get<Report>(`${this.baseUrl}/reports`);
+  getAllReports(): Observable<Report[]> {
+    return this.http.get<Report[]>(`${this.baseUrl}/reports`);
   }
-  getAllMaintenances(): Observable<Maintenance> {
-    return this.http.get<Maintenance>(`${this.baseUrl}/maintenances`);
+  getAllMaintenances(): Observable<Maintenance[]> {
+    return this.http.get<Maintenance[]>(`${this.baseUrl}/maintenances`);
   }
-  getAllMissions(): Observable<Mission> {
-    return this.http.get<Mission>(`${this.baseUrl}/missions`);
+  getAllMissions(): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.baseUrl}/missions`);
   }
+
+ 
 
   // get Dashboard
   getDash(): Observable<DashData> {
     return this.http.get<DashData>(`${this.baseUrl}/dash`);
   }
+ 
 
   // dispo and not dispo
   changeToDispo(id:number): Observable<any> {
@@ -54,7 +58,7 @@ export class CommonService {
 
   // v or A
   changeToValid(id:number): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/mission/${id}/ok`,{});
+    return this.http.put<any>(`${this.baseUrl}/missions/${id}/ok`,{});
   }
   changeToRefuse(id:number): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/missions/${id}/ko`,{});
@@ -62,19 +66,19 @@ export class CommonService {
 
   // Ajouter
 
-  addClient(createRequest:Client): Observable<any> {
+  addClient(createRequest:any): Observable<any> {
     return this.http.post(`${this.baseUrl}/employes`,createRequest);
   }
-  addMaintenance(createRequest:Maintenance): Observable<any> {
+  addMaintenance(createRequest:any): Observable<any> {
     return this.http.post(`${this.baseUrl}/maintenances`,createRequest);
   }
-  addVoiture(createRequest:Voiture): Observable<any> {
+  addVoiture(createRequest:any): Observable<any> {
     return this.http.post(`${this.baseUrl}/voitures`,createRequest);
   }
-  addReport(createRequest:Report): Observable<any> {
+  addReport(createRequest:any): Observable<any> {
     return this.http.post(`${this.baseUrl}/reports`,createRequest);
   }
-  addMission(createRequest:Mission): Observable<any> {
+  addMission(createRequest:any): Observable<any> {
     return this.http.post(`${this.baseUrl}/missions`,createRequest);
   }
 
@@ -94,5 +98,37 @@ export class CommonService {
   deleteMission(id:number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/missions/${id}`);
   }
+   // Get by Id
+   getClient(id:number): Observable<Client> {
+    return this.http.get<Client>(`${this.baseUrl}/employes/${id}`);
+  }
+  getMaintenance(id:number): Observable<Maintenance> {
+    return this.http.get<Maintenance>(`${this.baseUrl}/maintenances/${id}`);
+  }
+  getReport(id:number): Observable<Report> {
+    return this.http.get<Report>(`${this.baseUrl}/reports/${id}`);
+  }
+  getVoiture(id:number): Observable<Voiture> {
+    return this.http.get<Voiture>(`${this.baseUrl}/voitures/${id}`);
+  }
+  getMission(id:number): Observable<Mission> {
+    return this.http.get<Mission>(`${this.baseUrl}/missions/${id}`);
+  }
 
+     // Update
+     updateClient(id:number,createRequest:any): Observable<any> {
+      return this.http.put(`${this.baseUrl}/employes/${id}`,createRequest);
+    }
+    updateMaintenance(id:number,createRequest:any): Observable<any> {
+      return this.http.put(`${this.baseUrl}/maintenances/${id}`,createRequest);
+    }
+    updateReport(id:number, createRequest:any): Observable<any> {
+      return this.http.put(`${this.baseUrl}/reports/${id}`,createRequest);
+    }
+    updateVoiture(id:number, createRequest:any): Observable<any> {
+      return this.http.put(`${this.baseUrl}/voitures/${id}`, createRequest);
+    }
+    updateMission(id:number, createRequest:any): Observable<any> {
+      return this.http.put(`${this.baseUrl}/missions/${id}`, createRequest);
+    }
 }

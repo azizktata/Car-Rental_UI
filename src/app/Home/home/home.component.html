@@ -20,7 +20,7 @@
                 </div>
 
                 <!-- Content Row -->
-                <div class="row">
+                <div *ngIf="(dashData$ | async) as dashData" class="row">
                     <!-- Earnings (Monthly) Card Example -->
                     <div class="col-md-3 mb-4">
                         <div class="card border-left-primary shadow h-100 py-2">
@@ -32,7 +32,7 @@
                                     <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                         Nombre missions
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numMission}}</div>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                     <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                         Nombre client
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numClient}}</div>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                                     <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                         Nombre voitures
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numVoiture}}</div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                     <div class="text-md font-weight-bold text-warning text-uppercase mb-1">
                                         Nombre reports
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{dashData.numReport}}</div>
                                 </div>
                             </div>
                         </div>
@@ -101,8 +101,8 @@
                             </div>
 
                             <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="col-md-12 my-3">
+                            <div *ngIf="(dashData$ | async) as dashData" class="card-body">
+                                <!-- <div class="col-md-12 my-3">
                                     <label for="validationDefaultUsername" class="form-label">specifiez une date</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="inputGroupPrepend2"><i
@@ -111,27 +111,28 @@
                                             aria-describedby="inputGroupPrepend2" required>
                                         <button class="btn btn-primary" type="submit">trouver</button>
                                     </div>
-                                </div>
+                                </div> -->
 
-                                <ul class="list-group">
+                                <ul *ngFor="let alert of dashData.alerts" class="list-group">
 
-                                    <li class="list-group-item list-group-item-danger">
-                                        type maintenance
+                                    <li
+                                        [ngClass]="{'list-group-item': true, 'list-group-item-danger': alert.alertType==='accident', 'list-group-item-warning': alert.alertType!=='accident'}">
+                                        {{alert.alertType}} dans {{alert.alertDate}}
                                     </li>
                                     <li class="list-group-item list-group-item-secondary">
-                                        Caddy | 2024-05-01
+                                        Id: {{alert.voitureId}} | marque: {{alert.voitureInfo}}
                                     </li>
                                     <br />
                                     <!-- secondary success danger warning info light dark -->
 
 
-                                    <li class="list-group-item list-group-item-warning">
+                                    <!-- <li class="list-group-item list-group-item-warning">
                                         Incident
                                     </li>
                                     <li class="list-group-item list-group-item-secondary">
                                         Megane | 2024-02-12
                                     </li>
-                                    <br />
+                                    <br /> -->
                                 </ul>
                             </div>
                         </div>
@@ -149,28 +150,16 @@
                             </div>
                             <!-- Card Body -->
                             <div class="card-body">
-                                <ol class="list-group list-group-numbered">
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <ol *ngIf="(dashData$ | async) as dashData" class="list-group list-group-numbered">
+                                    <li *ngFor="let port of dashData.voitureParPort"
+                                        class="list-group-item d-flex justify-content-between align-items-start">
                                         <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Sidi bousaid</div>
-                                            Cras justo odio
+                                            <div class="fw-bold">{{port[0]}}</div>
+
                                         </div>
-                                        <span class="badge bg-primary rounded-pill">14</span>
+                                        <span class="badge bg-primary rounded-pill">{{port[1]}}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Rades</div>
-                                            Cras justo odio
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">14</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <div class="fw-bold">Beja</div>
-                                            Cras justo odio
-                                        </div>
-                                        <span class="badge bg-primary rounded-pill">14</span>
-                                    </li>
+
                                 </ol>
                             </div>
                         </div>
@@ -185,31 +174,31 @@
                                 </h6>
                             </div>
                             <!-- Card Body -->
-                            <div class="card-body">
+                            <div *ngIf="(dashData$ | async) as dashData" class="card-body">
                                 <ul class="list-group">
                                     <h5 class="my-3 text-secondary">voitures</h5>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Les voitures disponibles</div>
-                                        <span class="badge bg-success rounded-pill">14</span>
+                                        <span class="badge bg-success rounded-pill">{{dashData.voitureDispo}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Les voitures indisponibles</div>
-                                        <span class="badge bg-danger rounded-pill">2</span>
+                                        <span class="badge bg-danger rounded-pill">{{dashData.voitureIndispo}}</span>
                                     </li>
                                 </ul>
                                 <ul class="list-group">
                                     <h5 class="my-3 text-secondary">missions</h5>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Les mission validé</div>
-                                        <span class="badge bg-success rounded-pill">1</span>
+                                        <span class="badge bg-success rounded-pill">{{dashData.missionV}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Les mission encours</div>
-                                        <span class="badge bg-warning rounded-pill">4</span>
+                                        <span class="badge bg-warning rounded-pill">{{dashData.missionE}}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <div class="fw-bold">Les mission refusé</div>
-                                        <span class="badge bg-danger rounded-pill">2</span>
+                                        <span class="badge bg-danger rounded-pill">{{dashData.missionA}}</span>
                                     </li>
                                 </ul>
                             </div>

@@ -12,19 +12,19 @@
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <strong>Date debut</strong>
-                        <span class="badge text-bg-primary rounded-pill">2024-05-25</span>
+                        <span class="badge text-bg-primary rounded-pill">{{mission.dateDebut}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         Date fin
-                        <span class="badge text-bg-primary rounded-pill">2024-05-25</span>
+                        <span class="badge text-bg-primary rounded-pill">{{mission.dateFin}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         Lieux Debut
-                        <span class="badge text-bg-primary rounded-pill">Rades</span>
+                        <span class="badge text-bg-primary rounded-pill">{{mission.locationDebut}}</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         Lieux arrivage
-                        <span class="badge text-bg-primary rounded-pill">Hammamet</span>
+                        <span class="badge text-bg-primary rounded-pill">{{mission.locationFin}}</span>
                     </li>
                 </ul>
             </div>
@@ -43,16 +43,16 @@
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <strong>conducteur:</strong>
-                        <span class="badge text-bg-primary rounded-pill">Malek</span>
+                        <span class="badge text-bg-primary rounded-pill">{{mission.conducteur}}</span>
+
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Passager 1:
-                        <span class="badge text-bg-primary rounded-pill">Anis</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Passager 2:
-                        <span class="badge text-bg-primary rounded-pill">Hedi</span>
-                    </li>
+
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <strong>compagnons :</strong> {{mission.compagnons}}
+
+                        </li>
+                    </ul>
 
                 </ul>
             </div>
@@ -71,11 +71,11 @@
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <strong>kilometrage:</strong>
-                        <span class="badge text-bg-primary rounded-pill">100 KM</span>
+                        <span class="badge text-bg-primary rounded-pill">{{mission.consommation.kilometrage}} KM</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         gazoile:
-                        <span class="badge text-bg-primary rounded-pill">50 DT</span>
+                        <span class="badge text-bg-primary rounded-pill">{{mission.consommation.gazoile}} DT</span>
                     </li>
 
                 </ul>

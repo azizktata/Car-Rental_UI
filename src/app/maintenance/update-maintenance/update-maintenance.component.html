@@ -19,35 +19,32 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a (click)="goToMaintenancePage()">List des maintenances</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">ajouter maintenance</li>
+                            <li class="breadcrumb-item active" aria-current="page">modifier maintenance</li>
                         </ol>
                     </nav>
-                    <h1 class="h3 mb-0 text-gray-800">Ajouter Maintenance</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Modifier Maintenance</h1>
 
                 </div>
 
                 <div class="card shadow mb-4">
 
-                    <form #myForm="ngForm" ngSubmit (ngSubmit)="addMaintenance(myForm)"
-                        class="maintenance-form row g-3">
-                        <div *ngIf="(voitureData$ | async) as voitures" class="col-md-5">
+                    <form class="maintenance-form row g-3">
+                        <div class="col-md-5">
                             <label for="validationDefault04" class="form-label">Voiture</label>
-                            <select class="form-select" name="voitureId" [(ngModel)]="maintenanceRequest.voitureId"
+                            <select class="form-select" name="voitureId" [(ngModel)]="maintenance.voiture.id"
                                 id="validationDefault04" required>
-                                <option selected disabled>Choose...</option>
-                                <ng-container *ngFor="let voiture of voitures">
-                                    <option [value]="voiture.id">{{voiture.marque}}</option>
+                                <option selected [value]="maintenance.voiture.id">{{maintenance.voiture.marque}}
+                                </option>
 
-                                </ng-container>
 
 
                             </select>
                         </div>
                         <div class="col-md-5">
                             <label for="validationDefault04" class="form-label">Type maintenance</label>
-                            <select class="form-select" name="type" [(ngModel)]="maintenanceRequest.type"
+                            <select class="form-select" name="type" [(ngModel)]="maintenance.type"
                                 id="validationDefault04" required>
-                                <option selected disabled>Choose...</option>
+                                <option selected disabled [value]="maintenance.type">{{maintenance.type}}</option>
                                 <option value="Vidange">Vidange</option>
                                 <option value="Lavage">Lavage</option>
                                 <option value="Assurance">Assurance</option>
@@ -59,24 +56,26 @@
                             <label for="validationDefaultUsername" class="form-label">Frais</label>
                             <div class="input-group">
                                 <span class="input-group-text" id="inputGroupPrepend2">$</span>
-                                <input type="text" name="frais" [(ngModel)]="maintenanceRequest.frais"
-                                    class="form-control" id="validationDefaultUsername"
-                                    aria-describedby="inputGroupPrepend2" required>
+                                <input type="text" name="frais" [(ngModel)]="maintenance.frais" class="form-control"
+                                    id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
+                                    [value]="maintenance.frais" required>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="validationDefault03" class="form-label">Duree</label>
-                            <input type="text" name="duree" [(ngModel)]="maintenanceRequest.duree" class="form-control"
-                                id="validationDefault03" required>
+                            <input type="text" name="duree" [(ngModel)]="maintenance.duree" class="form-control"
+                                id="validationDefault03" [value]="maintenance.duree" required>
                         </div>
                         <div class="col-md-4">
                             <label for="validationDefault03" class="form-label">dateMaintenance</label>
-                            <input type="date" name="dateMaintenance" [(ngModel)]="maintenanceRequest.dateMaintenance"
-                                class="form-control" id="validationDefault03" required>
+                            <input type="date" name="dateMaintenance" [(ngModel)]="maintenance.dateMaintenance"
+                                class="form-control" [value]="maintenance.dateMaintenance" id="validationDefault03"
+                                required>
                         </div>
 
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit">Ajouter</button>
+                            <button class="btn btn-primary" (click)="updateMaintenance()"
+                                type="submit">Modifier</button>
                         </div>
                     </form>
                 </div>

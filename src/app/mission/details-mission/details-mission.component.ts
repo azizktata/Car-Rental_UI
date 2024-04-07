@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Mission } from 'src/app/_Models/mission';
 
 @Component({
   selector: 'app-details-mission',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./details-mission.component.css']
 })
 export class DetailsMissionComponent {
+
+  @Input()
+  mission!:Mission;
+
 
 }

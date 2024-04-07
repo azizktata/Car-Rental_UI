@@ -19,6 +19,11 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { AddMaintenanceComponent } from './maintenance/add-maintenance/add-maintenance.component';
 import { DetailsMissionComponent } from './mission/details-mission/details-mission.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NgToastModule } from 'ng-angular-popup';
+import { UpdateVoitureComponent } from './voiture/update-voiture/update-voiture.component';
+import { UpdateMaintenanceComponent } from './maintenance/update-maintenance/update-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -36,13 +41,18 @@ import { HttpClientModule } from '@angular/common/http';
     ReportComponent,
     MaintenanceComponent,
     AddMaintenanceComponent,
-    DetailsMissionComponent
+    DetailsMissionComponent,
+    UpdateVoitureComponent,
+    UpdateMaintenanceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DataTablesModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    FormsModule,
+    NgToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

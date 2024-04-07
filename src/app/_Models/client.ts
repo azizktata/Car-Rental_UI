@@ -1,4 +1,5 @@
 import { Mission } from "./mission"
+import { Report } from "./report"
 
 export interface Client {
     username: string

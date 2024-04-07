@@ -6,6 +6,7 @@ export interface Voiture {
     marque: string
     model:string
     numMatricule: string
+    portName: string
     statusVoiture: string
     maintenanceList: Maintenance[]
     accidentList: Report[]

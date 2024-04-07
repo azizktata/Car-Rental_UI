@@ -11,6 +11,8 @@ import { ReportComponent } from './report/report.component';
 import { DetailsVoitureComponent } from './voiture/details-voiture/details-voiture.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { AddMaintenanceComponent } from './maintenance/add-maintenance/add-maintenance.component';
+import { UpdateVoitureComponent } from './voiture/update-voiture/update-voiture.component';
+import { UpdateMaintenanceComponent } from './maintenance/update-maintenance/update-maintenance.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'voitures', component: VoitureComponent},
   { path: 'voitures/add', component: AddVoitureComponent},
+  { path: 'voitures/update/:id', component: UpdateVoitureComponent},
+
   // { path: 'voitures/details', component: DetailsVoitureComponent},
   { path: 'clients', component: ClientComponent},
   { path: 'clients/details', component: DetailsClientComponent},
@@ -26,6 +30,7 @@ const routes: Routes = [
   { path: 'reports', component: ReportComponent},
   { path: 'maintenances', component: MaintenanceComponent},
   { path: 'maintenances/add', component: AddMaintenanceComponent},
+  { path: 'maintenances/update/:id', component: UpdateMaintenanceComponent},
 
 
 

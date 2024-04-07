@@ -1,9 +1,12 @@
+import { Client } from "./client"
+import { Voiture } from "./voiture"
+
 export interface Report {
     id: number
-    subject: string
+    sujet: string
     description: string
     dateAccident: string
     lieuxAccident: string
-    voiture: number
-    employe: string
+    voiture: Voiture
+    employe: Client
   }

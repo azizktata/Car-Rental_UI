@@ -28,7 +28,8 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" datatable class="table table-striped  text-nowrap" style="width:100%">
+                            <table *ngIf="(clientData$ | async) as clients" id="example" datatable
+                                class="table table-striped  text-nowrap" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
                                         <th>id</th>
@@ -39,42 +40,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>. 1</td>
-                                        <td> <i class="bi bi-person-bounding-box px-3"></i>Tiger
-                                            Nixon</td>
-                                        <td>tiger@gmail.com</td>
-                                        <td>Chef</td>
+                                    <tr *ngFor="let client of clients">
+                                        <td>{{client.id}}</td>
+                                        <td> <i class="bi bi-person-bounding-box px-3"></i>{{client.username}}</td>
+                                        <td>{{client.email}}</td>
+                                        <td>{{client.fonction}}</td>
 
 
                                         <td>
                                             <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
                                                 data-ripple-color="primary">
-                                                <i class="bi bi-x"></i>
+                                                <i (click)="deleteClient(client.id)" class="bi bi-x h5"></i>
                                             </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>. 2</td>
-                                        <td> <i class="bi bi-person-bounding-box px-3"></i>Garrett
-                                            Winters</td>
-                                        <td>garet@gmail.com</td>
-                                        <td>Employe</td>
 
-
-                                        <td>
-                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-x"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
                                         </td>
                                     </tr>
 

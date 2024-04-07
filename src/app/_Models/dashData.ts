@@ -9,4 +9,5 @@ export interface DashData {
     missionE: number
     missionA: number
     voitureParPort: any
+    alerts: any
   }

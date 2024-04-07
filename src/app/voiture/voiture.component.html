@@ -28,11 +28,13 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" datatable class="table table-striped text-nowrap" style="width:100%">
+                            <table *ngIf="(voitureData$ | async) as voitures" id="example" datatable
+                                class="table table-striped text-nowrap" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
 
                                         <th>marque</th>
+                                        <th>model</th>
                                         <th>numMatricule</th>
                                         <th>carburant</th>
                                         <th>numChassis</th>
@@ -42,48 +44,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr *ngFor="let voiture of voitures">
 
                                         <td (click)="showModel('voitureModel')"><i
-                                                class="bi bi-car-front-fill px-3"></i>Megane</td>
-                                        <td>145 178 247</td>
-                                        <td>Essence</td>
-                                        <td>61</td>
-                                        <td><span class="badge badge-success rounded-pill d-inline">Disponible</span>
+                                                class="bi bi-car-front-fill px-3 h5"></i>{{voiture.marque}}</td>
+                                        <td>{{voiture.model}}</td>
+                                        <td>{{voiture.numMatricule}}</td>
+                                        <td>{{voiture.carburant}}</td>
+                                        <td>{{voiture.numChassis}}</td>
+                                        <td><span (click)="changeStatusToIndispo(voiture.id)"
+                                                *ngIf="voiture.statusVoiture==='disponible'"
+                                                class="badge badge-success rounded-pill d-inline">
+                                                {{voiture.statusVoiture}}</span>
+                                            <span (click)="changeStatusToDispo(voiture.id)"
+                                                *ngIf="voiture.statusVoiture==='indisponible'"
+                                                class="badge badge-warning rounded-pill d-inline">
+                                                {{voiture.statusVoiture}}</span>
+
                                         </td>
-                                        <td>2144 KM</td>
+                                        <td>{{voiture.compteurKm}} KM</td>
                                         <td>
                                             <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
                                                 data-ripple-color="primary">
-                                                <i class="bi bi-x"></i>
+                                                <i (click)="deleteVoiture(voiture.id)" class="bi bi-x h5"></i>
                                             </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
+                                            <button (click)="goToUpdateVoiture(voiture.id)" type="button"
+                                                class="btn btn-link btn-sm px-3" data-mdb-ripple-init
                                                 data-ripple-color="primary">
-                                                <i class="bi bi-pencil"></i>
+                                                <i class="bi bi-pencil h5"></i>
                                             </button>
                                         </td>
                                     </tr>
-                                    <tr>
 
-                                        <td (click)="showModel('voitureModel')"><i
-                                                class="bi bi-car-front-fill px-3"></i>Caddy</td>
-                                        <td>142 145 255</td>
-                                        <td>Diesel</td>
-                                        <td>63</td>
-                                        <td><span class="badge badge-warning rounded-pill d-inline">Indisponible</span>
-                                        </td>
-                                        <td>785 KM</td>
-                                        <td>
-                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-x"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
 
 
                                 </tbody>
