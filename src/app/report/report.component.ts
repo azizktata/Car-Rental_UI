@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-voiture',
-  templateUrl: './voiture.component.html',
-  styleUrls: ['./voiture.component.css']
+  selector: 'app-report',
+  templateUrl: './report.component.html',
+  styleUrls: ['./report.component.css']
 })
-
-
-export class VoitureComponent {
-  constructor(private router:Router){}
+export class ReportComponent {
   showModel(modelName: string){
     var model = document.getElementById(modelName);
     if (model){
@@ -24,10 +20,4 @@ export class VoitureComponent {
     model.style.display = 'none';
   }
   }
-  goToAddVoiture(){
-    this.router.navigate(['voitures/add']);
-  }
-
-
-
 }

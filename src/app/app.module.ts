@@ -13,7 +13,12 @@ import { AddVoitureComponent } from './voiture/add-voiture/add-voiture.component
 import { DetailsVoitureComponent } from './voiture/details-voiture/details-voiture.component';
 import { ClientComponent } from './client/client.component';
 import { AddClientComponent } from './client/add-client/add-client.component';
-import { DetailsClientComponent } from './client/details-client/details-client.component';
+import { DetailsClientComponent } from './details-client/details-client.component';
+import { ReportComponent } from './report/report.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { AddMaintenanceComponent } from './maintenance/add-maintenance/add-maintenance.component';
+import { DetailsMissionComponent } from './mission/details-mission/details-mission.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,12 +32,17 @@ import { DetailsClientComponent } from './client/details-client/details-client.c
     DetailsVoitureComponent,
     ClientComponent,
     AddClientComponent,
-    DetailsClientComponent
+    DetailsClientComponent,
+    ReportComponent,
+    MaintenanceComponent,
+    AddMaintenanceComponent,
+    DetailsMissionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DataTablesModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

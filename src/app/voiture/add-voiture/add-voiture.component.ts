@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-voiture',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-voiture.component.css']
 })
 export class AddVoitureComponent {
-
+  constructor(private router:Router){
+  }
+  goToVoiturePage(){
+    this.router.navigate(['voitures']);
+  }
 }

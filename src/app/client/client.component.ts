@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client',
@@ -6,6 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent {
+  constructor(private router:Router){}
+
   showModel(modelName: string){
     var model = document.getElementById(modelName);
     if (model){
@@ -19,5 +22,8 @@ export class ClientComponent {
     model.classList.remove('show');
     model.style.display = 'none';
   }
+  }
+  goToAddClientPage(){
+    this.router.navigate(['clients/add']);
   }
 }
