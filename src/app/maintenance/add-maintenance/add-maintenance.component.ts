@@ -46,7 +46,7 @@ export class AddMaintenanceComponent implements OnInit {
     }
   }
   goToMaintenancePage(){
-    this.router.navigate(['maintenances']);
+    this.router.navigate(['admin/maintenances']);
   }
   ngOnInit(): void {
     this.voitureData$ = this.fetchVoitures();

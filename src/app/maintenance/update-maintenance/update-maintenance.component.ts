@@ -42,7 +42,7 @@ export class UpdateMaintenanceComponent implements OnInit{
     
   }
   goToMaintenancePage(){
-    this.router.navigate(['maintenances']);
+    this.router.navigate(['admin/maintenances']);
   }
   ngOnInit() {
     this.maintenanceData$ = this.fetchMaintenance()

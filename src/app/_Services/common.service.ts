@@ -21,7 +21,31 @@ export class CommonService {
     private http: HttpClient,
   ) { }
 
+ //login
 
+  login(loginRequest:any): Observable<Client> {
+    return this.http.post<Client>(`${this.baseUrl}/employes/login`,loginRequest);
+  }
+  register(registerRequest:any): Observable<Client> {
+    return this.http.post<Client>(`${this.baseUrl}/employes`,registerRequest);
+  }
+  setId(id:string){
+    localStorage.setItem('id',id);
+  }
+  setUsername(username:string){
+    localStorage.setItem('username',username);
+  }
+  logout(){
+    localStorage.clear();
+  }
+
+  //Mes services
+  getMyReports(id:number): Observable<Report[]> {
+    return this.http.get<Report[]>(`${this.baseUrl}/reports/employe/${id}`);
+  }
+  getMyMissions(id:number): Observable<Mission[]> {
+    return this.http.get<Mission[]>(`${this.baseUrl}/missions/employe/${id}`);
+  }
 
   // Get all 
   getAllClients(): Observable<Client[]> {
@@ -55,6 +79,10 @@ export class CommonService {
   changeToIndispo(id:number): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/voitures/${id}/indispo`,{});
   }
+  getVoituresDispo(): Observable<Voiture[]> {
+    return this.http.get<Voiture[]>(`${this.baseUrl}/voitures/dispo`,{});
+  }
+
 
   // v or A
   changeToValid(id:number): Observable<any> {
@@ -75,11 +103,11 @@ export class CommonService {
   addVoiture(createRequest:any): Observable<any> {
     return this.http.post(`${this.baseUrl}/voitures`,createRequest);
   }
-  addReport(createRequest:any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/reports`,createRequest);
+  addReport(createRequest:any,id:number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/reports/employe/${id}`,createRequest);
   }
-  addMission(createRequest:any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/missions`,createRequest);
+  addMission(createRequest:any,id:number): Observable<any> {
+    return this.http.post(`${this.baseUrl}/missions/employe/${id}`,createRequest);
   }
 
   //delete

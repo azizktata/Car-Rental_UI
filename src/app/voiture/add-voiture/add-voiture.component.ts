@@ -48,6 +48,6 @@ export class AddVoitureComponent {
     }
   }
   goToVoiturePage(){
-    this.router.navigate(['voitures']);
+    this.router.navigate(['admin/voitures']);
   }
 }

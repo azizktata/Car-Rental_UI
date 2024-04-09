@@ -40,10 +40,10 @@ export class MaintenanceComponent implements OnInit {
   }
 
   goToAddMaintenance(){
-    this.router.navigate(['maintenances/add']);
+    this.router.navigate(['admin/maintenances/add']);
   }
   goToUpdateMaintenance(id:number){
-    this.router.navigate([`maintenances/update/${id}`]);
+    this.router.navigate([`admin/maintenances/update/${id}`]);
   }
   ngOnInit(): void {
     this.maintenanceData$ = this.fetchMaintenances();

@@ -30,10 +30,10 @@ export class VoitureComponent implements OnInit {
   }
   }
   goToAddVoiture(){
-    this.router.navigate(['voitures/add']);
+    this.router.navigate(['admin/voitures/add']);
   }
   goToUpdateVoiture(id:number){
-    this.router.navigate([`voitures/update/${id}`]);
+    this.router.navigate([`admin/voitures/update/${id}`]);
   }
  
   voitures: Voiture[] = [];
@@ -41,7 +41,7 @@ export class VoitureComponent implements OnInit {
 
   fetchVoitures():Observable<Voiture[]>{
     return this.voitureService.getAllVoitures()
-  }
+  } 
   deleteVoiture(id:number){
     this.voitureService.deleteVoiture(id).subscribe({
       next: res => {

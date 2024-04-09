@@ -10,19 +10,25 @@ export class NavbarComponent {
 
   constructor(private router:Router){}
 
+
+
+
   goToVoiturePage(){
-    this.router.navigate(["/voitures"]);  
+    this.router.navigate(["/admin/voitures"]);  
   }
   goToClientPage(){
-    this.router.navigate(["/clients"]);  
+    this.router.navigate(["/admin/clients"]);  
   }
   goToMissionPage(){
-    this.router.navigate(["/missions"]);  
+    this.router.navigate(["/admin/missions"]);  
   }
   goToReportPage(){
-    this.router.navigate(["/reports"]);  
+    this.router.navigate(["/admin/reports"]);  
   }
   goToMaintenancePage(){
-    this.router.navigate(["/maintenances"]);  
+    this.router.navigate(["/admin/maintenances"]);  
+  }
+  goToDashboardPage(){
+    this.router.navigate(["/admin/dashboard"]);  
   }
 }

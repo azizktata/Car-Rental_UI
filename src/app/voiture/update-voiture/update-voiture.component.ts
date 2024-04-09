@@ -43,7 +43,7 @@ export class UpdateVoitureComponent implements OnInit {
     
   }
   goToVoiturePage(){
-    this.router.navigate(['voitures']);
+    this.router.navigate(['admin/voitures']);
   }
   ngOnInit() {
     this.voitureData$ = this.fetchVoiture()
