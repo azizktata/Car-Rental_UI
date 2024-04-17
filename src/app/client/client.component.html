@@ -22,89 +22,39 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="bi bi-plus"></i> Ajouter clients</a>
+                        <a (click)="goToAddClientPage()"
+                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="bi bi-plus"></i>
+                            Ajouter client</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" datatable class="table table-striped  text-nowrap" style="width:100%">
+                            <table *ngIf="(clientData$ | async) as clients" id="example" datatable
+                                class="table table-striped  text-nowrap" style="width:100%">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th scope="col"></th>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>id</th>
+                                        <th>username</th>
+                                        <th>email</th>
+                                        <th>fonction</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row"><i class="bi bi-info-circle"></i></th>
+                                    <tr *ngFor="let client of clients">
+                                        <td>{{client.id}}</td>
+                                        <td> <i class="bi bi-person-bounding-box px-3"></i>{{client.username}}</td>
+                                        <td>{{client.email}}</td>
+                                        <td>{{client.fonction}}</td>
 
-                                        <td (click)="showModel('voitureModel')"> <img
-                                                src="https://i.imgur.com/VKOeFyS.png" width="25">Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011-04-25</td>
-                                        <td>$320,800</td>
+
                                         <td>
                                             <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
                                                 data-ripple-color="primary">
-                                                <i class="bi bi-x"></i>
+                                                <i (click)="deleteClient(client.id)" class="bi bi-x h5"></i>
                                             </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
+
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row"><i class="bi bi-info-circle"></i></th>
-
-                                        <td> <img src="https://i.imgur.com/VKOeFyS.png" width="25">Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011-07-25</td>
-                                        <td>$170,750</td>
-                                        <td>
-                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-x"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"><i class="bi bi-info-circle"></i></th>
-
-                                        <td> <img src="https://i.imgur.com/VKOeFyS.png" width="25">Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009-01-12</td>
-                                        <td>$86,000</td>
-                                        <td>
-                                            <button type="button" class="btn btn-link btn-sm " data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-x"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-link btn-sm px-3" data-mdb-ripple-init
-                                                data-ripple-color="primary">
-                                                <i class="bi bi-pencil"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-
-
-
 
                                 </tbody>
                                 <tfoot>
@@ -123,31 +73,6 @@
                 </div>
 
 
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="voitureModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Plus info client</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    (click)="closeModel('voitureModel')"></button>
-            </div>
-            <div class="modal-body">
-                <app-details-client></app-details-client>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="closeModel('voitureModel')"
-                    data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
