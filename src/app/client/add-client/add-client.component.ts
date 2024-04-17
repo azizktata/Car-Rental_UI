@@ -50,6 +50,6 @@ export class AddClientComponent {
   }
 
   goToClientPage(){
-    this.router.navigate(['/clients']);
+    this.router.navigate(['/admin/clients']);
   }
 }

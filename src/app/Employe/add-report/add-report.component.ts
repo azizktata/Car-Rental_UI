@@ -53,7 +53,7 @@ export class AddReportComponent {
   voitureData$ = new Observable<Voiture[]>();
 
   fetchVoitures():Observable<Voiture[]>{
-    return this.reportService.getVoituresDispo()
+    return this.reportService.getAllVoitures()
   }
   goToHomePage(){
     this.router.navigate(['home']);

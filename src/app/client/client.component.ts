@@ -50,7 +50,7 @@ export class ClientComponent implements OnInit {
   }
   }
   goToAddClientPage(){
-    this.router.navigate(['clients/add']);
+    this.router.navigate(['admin/clients/add']);
   }
 
   ngOnInit(): void {
